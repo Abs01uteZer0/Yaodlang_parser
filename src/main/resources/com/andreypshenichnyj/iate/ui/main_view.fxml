@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.andreypshenichnyj.iate.ui.MainViewController">
+
+    <center>
+        <VBox spacing="15" alignment="TOP_LEFT">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <!-- DDL File Selection -->
+            <HBox spacing="10">
+                <Label text="DDL файл:"/>
+                <Button text="Выбрать" onAction="#onSelectDdlFile"/>
+                <Label fx:id="ddlFileLabel" text="Файл не выбран" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+            <!-- DAT Files Selection -->
+            <HBox spacing="10">
+                <Label text="DAT файлы:"/>
+                <Button text="Выбрать" onAction="#onSelectDatFiles"/>
+                <Label fx:id="datFilesLabel" text="Файлы не выбраны" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+            <!-- Export Directory -->
+            <HBox spacing="10">
+                <Label text="Папка экспорта:"/>
+                <Button text="Выбрать" onAction="#onSelectExportDirectory"/>
+                <Label fx:id="exportDirectoryLabel" text="Папка не выбрана" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+            <!-- Output File Name -->
+            <HBox spacing="10">
+                <Label text="Имя файла:"/>
+                <TextField fx:id="fileNameField" promptText="оставьте пустым для автогенерации" HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+            <!-- Export Format Selection -->
+            <HBox spacing="10">
+                <Label text="Формат экспорта:"/>
+                <CheckBox fx:id="csvCheckBox" text="CSV"/>
+                <CheckBox fx:id="jsonCheckBox" text="JSON"/>
+                <CheckBox fx:id="txtCheckBox" text="TXT"/>
+            </HBox>
+
+            <!-- Parser Selection -->
+            <HBox spacing="10">
+                <Label text="Парсер:"/>
+                <RadioButton fx:id="fullParserRadio" text="Full"/>
+                <RadioButton fx:id="fastParserRadio" text="Fast"/>
+                <RadioButton fx:id="smartParserRadio" text="Smart"/>
+            </HBox>
+
+            <!-- Run Button & Progress -->
+            <HBox spacing="10">
+                <Button text="Запустить" onAction="#onRunParser"/>
+                <ProgressBar fx:id="progressBar" progress="0.0" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>
