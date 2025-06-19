@@ -37,7 +37,6 @@ public abstract class AbstractDataParser implements DataParser {
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filePath),
                 java.nio.charset.StandardCharsets.UTF_8)) {
 
-            // UTF-8 BOM for Excel
             writer.write('\uFEFF');
 
             Set<String> headers = parsedLines.get(0).getFieldValues().keySet();

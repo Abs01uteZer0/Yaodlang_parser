@@ -47,4 +47,8 @@ public class Format {
     public String toString() {
         return precision == null ? formatType + "(" + width + ")" : formatType + "(" + width + "," + precision + ")";
     }
+
+    public String toStringWithoutPrecision() {
+        return formatType + "(" + width + ")";
+    }
 }

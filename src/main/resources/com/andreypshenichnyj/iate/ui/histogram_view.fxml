@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.andreypshenichnyj.iate.ui.HistogramViewController"
+      spacing="15">
+
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+
+    <Label fx:id="xTitleLabel" text="Гистограмма X" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+    <BarChart fx:id="xBarChart" prefHeight="250">
+        <xAxis>
+            <CategoryAxis fx:id="xXAxis"/>
+        </xAxis>
+        <yAxis>
+            <NumberAxis label="Частота"/>
+        </yAxis>
+    </BarChart>
+
+    <Label fx:id="yTitleLabel" text="Гистограмма Y" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+    <BarChart fx:id="yBarChart" prefHeight="250">
+        <xAxis>
+            <CategoryAxis fx:id="yXAxis"/>
+        </xAxis>
+        <yAxis>
+            <NumberAxis label="Частота"/>
+        </yAxis>
+    </BarChart>
+
+</VBox>

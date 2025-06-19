@@ -3,67 +3,107 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.andreypshenichnyj.iate.ui.MainViewController">
 
     <center>
-        <VBox spacing="15" alignment="TOP_LEFT">
-            <padding>
-                <Insets top="20" right="20" bottom="20" left="20"/>
-            </padding>
+        <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE" style="-fx-background-color: #f9f9f9;">
+            <Tab text="Главное окно">
+                <ScrollPane fitToWidth="true">
+                    <VBox spacing="20" alignment="TOP_LEFT" style="-fx-padding: 25;">
 
-            <!-- DDL File Selection -->
-            <HBox spacing="10">
-                <Label text="DDL файл:"/>
-                <Button text="Выбрать" onAction="#onSelectDdlFile"/>
-                <Label fx:id="ddlFileLabel" text="Файл не выбран" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
-            </HBox>
+                        <TitledPane text="DDL и DAT файлы" expanded="true">
+                            <VBox spacing="15">
+                                <padding>
+                                    <Insets top="10" right="10" bottom="10" left="10"/>
+                                </padding>
+                                <HBox spacing="10">
+                                    <Label text="DDL файл:"/>
+                                    <Button text="Выбрать" onAction="#onSelectDdlFile"/>
+                                    <Label fx:id="ddlFileLabel" text="Файл не выбран" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                                </HBox>
 
-            <!-- DAT Files Selection -->
-            <HBox spacing="10">
-                <Label text="DAT файлы:"/>
-                <Button text="Выбрать" onAction="#onSelectDatFiles"/>
-                <Label fx:id="datFilesLabel" text="Файлы не выбраны" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
-            </HBox>
+                                <HBox spacing="10">
+                                    <Label text="DAT файлы:"/>
+                                    <Button text="Выбрать" onAction="#onSelectDatFiles"/>
+                                </HBox>
 
-            <!-- Export Directory -->
-            <HBox spacing="10">
-                <Label text="Папка экспорта:"/>
-                <Button text="Выбрать" onAction="#onSelectExportDirectory"/>
-                <Label fx:id="exportDirectoryLabel" text="Папка не выбрана" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
-            </HBox>
+                                <VBox spacing="5">
+                                    <Label text="Выбранные DAT файлы:"/>
+                                    <ListView fx:id="datFilesListView" prefHeight="100" onMouseClicked="#onDatFileListClicked"/>
+                                </VBox>
+                            </VBox>
+                        </TitledPane>
 
-            <!-- Output File Name -->
-            <HBox spacing="10">
-                <Label text="Имя файла:"/>
-                <TextField fx:id="fileNameField" promptText="оставьте пустым для автогенерации" HBox.hgrow="ALWAYS"/>
-            </HBox>
+                        <TitledPane text="Настройки экспорта" expanded="true">
+                            <VBox spacing="15">
+                                <padding>
+                                    <Insets top="10" right="10" bottom="10" left="10"/>
+                                </padding>
+                                <HBox spacing="10">
+                                    <Label text="Папка экспорта:"/>
+                                    <Button text="Выбрать" onAction="#onSelectExportDirectory"/>
+                                    <Label fx:id="exportDirectoryLabel" text="Папка не выбрана" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                                </HBox>
 
-            <!-- Export Format Selection -->
-            <HBox spacing="10">
-                <Label text="Формат экспорта:"/>
-                <CheckBox fx:id="csvCheckBox" text="CSV"/>
-                <CheckBox fx:id="jsonCheckBox" text="JSON"/>
-                <CheckBox fx:id="txtCheckBox" text="TXT"/>
-            </HBox>
+                                <HBox spacing="10">
+                                    <Label text="Имя файла:"/>
+                                    <TextField fx:id="fileNameField" promptText="оставьте пустым для автогенерации" HBox.hgrow="ALWAYS"/>
+                                </HBox>
 
-            <!-- Parser Selection -->
-            <HBox spacing="10">
-                <Label text="Парсер:"/>
-                <RadioButton fx:id="fullParserRadio" text="Full"/>
-                <RadioButton fx:id="fastParserRadio" text="Fast"/>
-                <RadioButton fx:id="smartParserRadio" text="Smart"/>
-            </HBox>
+                                <HBox spacing="10">
+                                    <Label text="Кодировка:"/>
+                                    <ComboBox fx:id="encodingComboBox">
+                                        <items>
+                                            <FXCollections fx:factory="observableArrayList">
+                                                <String fx:value="UTF-8"/>
+                                                <String fx:value="windows-1251"/>
+                                            </FXCollections>
+                                        </items>
+                                    </ComboBox>
+                                </HBox>
 
-            <!-- Run Button & Progress -->
-            <HBox spacing="10">
-                <Button text="Запустить" onAction="#onRunParser"/>
-                <ProgressBar fx:id="progressBar" progress="0.0" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
-            </HBox>
+                                <HBox spacing="10">
+                                    <Label text="Формат экспорта:"/>
+                                    <CheckBox fx:id="csvCheckBox" text="CSV"/>
+                                    <CheckBox fx:id="jsonCheckBox" text="JSON"/>
+                                    <CheckBox fx:id="txtCheckBox" text="TXT"/>
+                                </HBox>
+                            </VBox>
+                        </TitledPane>
 
-        </VBox>
+                        <TitledPane text="Парсинг" expanded="true">
+                            <VBox spacing="15">
+                                <padding>
+                                    <Insets top="10" right="10" bottom="10" left="10"/>
+                                </padding>
+                                <HBox spacing="10">
+                                    <Label text="Парсер:"/>
+                                    <RadioButton fx:id="fullParserRadio" text="Full"/>
+                                    <RadioButton fx:id="fastParserRadio" text="Fast"/>
+                                    <RadioButton fx:id="smartParserRadio" text="Smart"/>
+                                </HBox>
+                                <HBox spacing="10">
+                                    <CheckBox fx:id="addToDbCheckBox" text="Добавить в БД" selected="true"/>
+                                </HBox>
+                                <HBox spacing="10">
+                                    <Button text="Запустить" onAction="#onRunParser"/>
+                                    <ProgressBar fx:id="progressBar" progress="0.0" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                                </HBox>
+                            </VBox>
+                        </TitledPane>
+
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+
+            <Tab text="Таблица данных">
+                <fx:include source="table_view.fxml"/>
+            </Tab>
+        </TabPane>
     </center>
-
 </BorderPane>

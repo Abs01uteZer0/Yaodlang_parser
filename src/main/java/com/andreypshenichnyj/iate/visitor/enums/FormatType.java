@@ -1,10 +1,10 @@
 package com.andreypshenichnyj.iate.visitor.enums;
 
 public enum FormatType {
-    FA,  // Fixed Alphanumeric
-    PC,  // Packed Compressed
-    FC,  // Floating Compressed
-    BI,  // Binary Integer
+    FA,
+    PC,
+    FC,
+    BI,
     UNKNOWN;
 
     public static FormatType fromString(String text) {

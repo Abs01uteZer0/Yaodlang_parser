@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.andreypshenichnyj.iate.ui.ChartViewController">
+
+    <center>
+        <LineChart fx:id="lineChart" createSymbols="false" animated="true">
+            <xAxis>
+                <NumberAxis label="X"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Y"/>
+            </yAxis>
+        </LineChart>
+    </center>
+
+</BorderPane>

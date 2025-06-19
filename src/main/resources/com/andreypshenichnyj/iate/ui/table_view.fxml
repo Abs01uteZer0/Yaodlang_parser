@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.andreypshenichnyj.iate.ui.TableViewController"
+      spacing="10" alignment="TOP_LEFT">
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+
+    <HBox spacing="10">
+        <Label text="Family:"/>
+        <ComboBox fx:id="familyComboBox" prefWidth="150"/>
+        <Label text="Format:"/>
+        <ComboBox fx:id="formatComboBox" prefWidth="150"/>
+        <Label text="File:"/>
+        <ComboBox fx:id="fileComboBox" prefWidth="150"/>
+        <Button fx:id="loadButton" text="Загрузить"/>
+    </HBox>
+
+    <TableView fx:id="dataTable" prefHeight="300" prefWidth="700"/>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Статистика для поля:"/>
+        <ComboBox fx:id="statFieldComboBox" prefWidth="150"/>
+        <Button fx:id="statButton" text="Показать статистику"/>
+        <Label fx:id="statLabel" text=""/>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="График X:"/>
+        <ComboBox fx:id="xFieldComboBox" prefWidth="150"/>
+        <Label text="График Y:"/>
+        <ComboBox fx:id="yFieldComboBox" prefWidth="150"/>
+        <Button fx:id="chartButton" text="Построить график"/>
+        <Button fx:id="histogramButton" text="Построить гистограмму"/>
+    </HBox>
+
+</VBox>

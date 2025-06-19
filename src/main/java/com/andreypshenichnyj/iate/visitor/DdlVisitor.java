@@ -1,6 +1,6 @@
 package com.andreypshenichnyj.iate.visitor;
 
-import com.andreypshenichnyj.iate.visitor.dto.Field;
+import com.andreypshenichnyj.iate.visitor.dto.FieldDTO;
 import com.andreypshenichnyj.iate.visitor.dto.Format;
 import com.andreypshenichnyj.iate.visitor.enums.FormatType;
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -15,16 +15,22 @@ import java.util.Map;
 
 public class DdlVisitor extends YaodlangBaseVisitor<Void> {
 
-    private final Map<String, Field> fieldsMap = new LinkedHashMap<>();
+    private final Map<String, FieldDTO> fieldsMap = new LinkedHashMap<>();
 
     private String lastComment = null;
 
-    public List<Field> getFields() {
+    private String familyName;
+
+    private String familyFormat;
+
+    public List<FieldDTO> getFields() {
         return new ArrayList<>(fieldsMap.values());
     }
 
     @Override
     public Void visitFamilyHeader(YaodlangParser.FamilyHeaderContext ctx) {
+        familyName = ctx.ID().getText();
+        familyFormat = ctx.FORMAT().getText();
         return null;
     }
 
@@ -104,13 +110,13 @@ public class DdlVisitor extends YaodlangBaseVisitor<Void> {
     }
 
     private void addField(String id, List<TerminalNode> formats, String comment) {
-        Field field = new Field(id, comment);
+        FieldDTO fieldDTO = new FieldDTO(id, comment);
         for (TerminalNode fmt : formats) {
             String text = fmt.getText();
             Format format = parseFormat(text);
-            field.addFormat(format);
+            fieldDTO.addFormat(format);
         }
-        fieldsMap.put(id, field);
+        fieldsMap.put(id, fieldDTO);
     }
 
     private void addField(String id, List<TerminalNode> formats) {
@@ -118,7 +124,7 @@ public class DdlVisitor extends YaodlangBaseVisitor<Void> {
     }
 
     private Format parseFormat(String text) {
-        String typePart = text.replaceAll("\\(.*?\\)", ""); // Убираем всё в скобках
+        String typePart = text.replaceAll("\\(.*?\\)", "");
         String[] params = text.contains("(") ? text.substring(text.indexOf('(') + 1, text.indexOf(')')).split(",") : new String[0];
 
         FormatType type = FormatType.fromString(typePart.trim());
@@ -126,5 +132,21 @@ public class DdlVisitor extends YaodlangBaseVisitor<Void> {
         int precision = params.length > 1 ? Integer.parseInt(params[1].trim()) : 0;
 
         return new Format(type, width, precision);
+    }
+
+    public String getFamilyName() {
+        return familyName;
+    }
+
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
+    }
+
+    public String getFamilyFormat() {
+        return familyFormat;
+    }
+
+    public void setFamilyFormat(String familyFormat) {
+        this.familyFormat = familyFormat;
     }
 }

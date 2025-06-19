@@ -10,7 +10,6 @@ yaodfile
 
 yaodline
     : 'FAMILY' family=ID format=FORMAT ';'                                 # familyHeader
-    | 'RECORDS;'                                                           # records
     | 'RECORD' recordname=ID ';'                                           # recordName
     | 'CHA' '(' chid=ID ')' id=ID formatList na='NA'? ';'                  # chaLine
     | 'KEY' '(' keyid=ID ')' id=ID formatList ';'                          # keyLine
@@ -33,3 +32,5 @@ fragment LETTER : [A-Za-z_абвгдеёжзиклмнопрстуфхцчшщъ
 fragment DIGIT  : [0-9] ;
 
 WS : [ \t]+ -> skip ;
+
+
